@@ -22,5 +22,5 @@ public class HelloWordController {
 		ModelAndView model = new ModelAndView("index");//model vai trazzer o metdo index
 		return model;// retornando o index
 	}
-
+	
 }

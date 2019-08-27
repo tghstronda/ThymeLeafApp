@@ -36,9 +36,16 @@ public class UsuarioService {
 		usuario3.setName("Adry");
 		usuario3.setPassword("adriano");
 		
+		Usuario usuario4 =  new Usuario();
+		usuario4.setId(50L);
+		usuario4.setName("AtividadeNinja");
+		usuario4.setPassword("swordfish");
+		
 		usuarios.add(usuario1);
 		usuarios.add(usuario2);
 		usuarios.add(usuario3);
+		usuarios.add(usuario4);
+		
 		
 		return usuarios;		
 	}

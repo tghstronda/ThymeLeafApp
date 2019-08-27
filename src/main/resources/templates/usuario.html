@@ -1,4 +1,4 @@
-	'1<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="https://WWW.thymeleaf.og">
 <!-- th texto automatico  -->
 <head>
@@ -7,17 +7,34 @@
 <title>Thymeleaf Exemplo</title>
 </head>
 <body>
+	<form action="#" th:action="@{/usuario}" th:object="${usuario}"
+		method="post">
+		<input type="text" id="name" th:field="*{name}"> 
+		<input type="password" id="password" th:field="*{password}">
+		<button type="submit">Salvar</button>
+		<!-- 
+		th:action e pra salvar um requiseção, uma requisição do tipo post nesse caso
+		$ puxa o objeto, object e objeto 
+		# e pra não puxar nada, entender que tem que puxar alguma função
+		campo do objeto 
+		field e campo 
+		submit e enviar algo 
+		-->
+	</form>
+
 	<h1>Lista de Usuarios</h1>
 
 	<table>
 		<tr>
 			<th>Id</th>
 			<th>Nome da Pessoa</th>
+			<th>Password</th>
 		</tr>
 		<tbody>
 			<tr th:each="usuario : ${usuarios}">
 				<td th:text="${usuario.id}"></td>
 				<td th:text="${usuario.name}"></td>
+				<td th:text="${usuario.password}"></td>
 			</tr>
 		</tbody>
 	</table>

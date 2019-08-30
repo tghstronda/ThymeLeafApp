@@ -21,7 +21,7 @@ public class UsuarioController {
 	private final UsuarioService usuarioService;
 
 	// Instanciando a classe usuario service
-	private UsuarioController(UsuarioService usuarioService) {
+	public UsuarioController(UsuarioService usuarioService) {
 		this.usuarioService = usuarioService;
 
 	}
@@ -29,15 +29,16 @@ public class UsuarioController {
 	@GetMapping("/usuarios") // metodo para listar usuarios
 	public ModelAndView ListarUsuarios() {
 		ModelAndView model = new ModelAndView("usuario");
-		model.addObject("usuarios", usuarioService.listUsuarios());
+		model.addObject("usuarios", usuarioService.listaUsuarios());
+		model.addObject("usuario",new Usuario());
 		// addobject adiciona um usuario na tela
 		// chamando a lista de usuarios no
-		model.addObject("usuario", new Usuario());
 		return model;
 	}
 
-	@PostMapping("/usuario") // insrir os dados no usuario
+	@PostMapping("/usuario") // inserir os dados no usuario
 	public String salvarUsuario(Usuario usuario) {
+		usuarioService.salvaUsuario(usuario);
 		return "redirect:/usuarios";// redirect ele para uma pasta
 	}
 

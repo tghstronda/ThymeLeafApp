@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="https://WWW.thymeleaf.og">
-<!-- th texto automatico  -->
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<title>Thymeleaf Exemplo</title>
-
+<title>Contatos</title>
 </head>
 <body>
 
-	<form action="#" th:action="@{/usuario}" th:object="${usuario}"
-		method="post">
-		<input type="text" id="name" th:field="*{name}"> 
-		<input type="password" id="password" th:field="*{password}">
+
+	<form action="#" th:action="@{/contato}" th:object="${contato}" method="post">
+		<input type="text" id="name" th:field="*{usuario.name}"> 
+		<input type="password" id="password" th:field="*{usuario.password}">
+		<input type="text" id="numero" th:field="*{numero}"> 
+		<input type="text" id="email" th:field="*{email}">
+		<input type="text" id="imagem" th:field="*{imagem}"> 
 		<button type="submit">Salvar</button>
 		<!-- 
 		th:action e pra salvar um requiseção, uma requisição do tipo post nesse caso
@@ -29,12 +30,18 @@
 			<th>Id</th>
 			<th>Nome da Pessoa</th>
 			<th>Password</th>
+			<th>Numero</th>
+			<th>Email</th>
+			<th>Imagem</th>
 		</tr>
 		<tbody>
-			<tr th:each="usuario : ${usuarios}">
+			<tr th:each="contato : ${contatos}">
 				<td th:text="${usuario.id}"></td>
 				<td th:text="${usuario.name}"></td>
 				<td th:text="${usuario.password}"></td>
+				<td th:text="${contato.numero}"></td>
+				<td th:text="${usuario.email}"></td>
+				<td th:text="${usuario.imagem}"></td>
 			</tr>
 		</tbody>
 	</table>

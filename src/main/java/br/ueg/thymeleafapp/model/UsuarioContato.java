@@ -1,66 +1,64 @@
-/**
- * 
- */
-package br.ueg.ThymeLeafApp.model;
+package br.ueg.thymeleafapp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * @author tghstronda
- *
- */
 @Entity
-public class Usuario {
+public class UsuarioContato {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)//cria em sequencia um atras do outro
-	private Long Id;// id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String name;
 	private String password;
-	/**
-	 * @return the id
-	 */
+	private String email;
+	private String celular;
+	private String imagem;
+	
 	public Long getId() {
-		return Id;
+		return id;
 	}
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
 	}
-	/**
-	 * @param name the name to set
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-	/**
-	 * @return the password
-	 */
 	public String getPassword() {
 		return password;
 	}
-	/**
-	 * @param password the password to set
-	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getCelular() {
+		return celular;
+	}
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+	public String getImagem() {
+		return imagem;
+	}
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 	@Override
@@ -71,15 +69,13 @@ public class Usuario {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
-		if (Id == null) {
-			if (other.Id != null)
+		UsuarioContato other = (UsuarioContato) obj;
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!Id.equals(other.Id))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-	
-	
 	
 }

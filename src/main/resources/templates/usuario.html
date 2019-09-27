@@ -1,42 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="https://WWW.thymeleaf.og">
-<!-- th texto automatico  -->
+<html xmlns:th="http://www.ThymeLeaf.org">
+
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-<title>Thymeleaf Exemplo</title>
-
+	<meta charset="UTF-8">
+	<link rel="stylesheet" 
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<link rel="stylesheet" type="text/css" href="main.css">
+	
 </head>
-<body>
 
-	<form action="#" th:action="@{/usuario}" th:object="${usuario}"
-		method="post">
-		<input type="text" id="name" th:field="*{name}"> 
-		<input type="password" id="password" th:field="*{password}">
-		<button type="submit">Salvar</button>
-		<!-- 
-		th:action e pra salvar um requiseção, uma requisição do tipo post nesse caso
-		$ puxa o objeto, object e objeto 
-		# e pra não puxar nada, entender que tem que puxar alguma função
-		campo do objeto 
-		field e campo 
-		submit e enviar algo 
-		-->
-	</form>
-	<table class="table table-dark">
-		<tr>
-			<th>Id</th>
-			<th>Nome da Pessoa</th>
-			<th>Password</th>
-		</tr>
+<body id="body2">
+
+	<h1>Lista de Usuários</h1>
+	
+	<table class="table">
+	
+		<thead>
+		
+			<tr>
+			 	<th>Id</th>
+			 	<th>Nome da Pessoa</th>
+			 	<th>Password</th>
+			 	<th>Celular</th>
+			 	<th>Imagem</th>
+			 </tr>
+			 
+		</thead>
 		<tbody>
+
 			<tr th:each="usuario : ${usuarios}">
 				<td th:text="${usuario.id}"></td>
 				<td th:text="${usuario.name}"></td>
 				<td th:text="${usuario.password}"></td>
+				<td th:text="${usuario.celular}"></td>
+				<td th:text="${usuario.imagem}"></td>
 			</tr>
+			
 		</tbody>
 	</table>
 </body>
+
 </html>

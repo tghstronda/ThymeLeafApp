@@ -1,4 +1,4 @@
-package br.ueg.ThymeLeafApp;
+package br.ueg.thymeleafapp;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

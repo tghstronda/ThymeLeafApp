@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package br.ueg.thymeleafapp.model;
 
 import javax.persistence.Entity;
@@ -5,56 +8,52 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * @author tghstronda
+ *
+ */
 @Entity
-public class UsuarioContato {
+public class Atividade {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String password;
-	private String email;
-	private String celular;
-	private String imagem;
-	
+	private String descricao;
+	private String status;
+	private Long idUsuarioContato;
 
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-	public String getPassword() {
-		return password;
+
+	public String getStatus() {
+		return status;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	public String getEmail() {
-		return email;
+
+	public Long getIdUsuarioContato() {
+		return idUsuarioContato;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setIdUsuarioContato(Long idUsuarioContato) {
+		this.idUsuarioContato = idUsuarioContato;
 	}
-	public String getCelular() {
-		return celular;
-	}
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-	public String getImagem() {
-		return imagem;
-	}
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
-	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -62,6 +61,7 @@ public class UsuarioContato {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -70,7 +70,7 @@ public class UsuarioContato {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UsuarioContato other = (UsuarioContato) obj;
+		Atividade other = (Atividade) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -78,5 +78,5 @@ public class UsuarioContato {
 			return false;
 		return true;
 	}
-	
+
 }

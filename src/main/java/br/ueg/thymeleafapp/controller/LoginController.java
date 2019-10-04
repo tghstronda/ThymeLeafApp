@@ -14,7 +14,7 @@ import br.ueg.thymeleafapp.services.UsuarioContatoService;
 public class LoginController {
 
 	private final UsuarioContatoService usuarioContatoService;
-	
+
 	public LoginController(UsuarioContatoService usuarioContatoService) {
 		this.usuarioContatoService = usuarioContatoService;
 	}
@@ -23,27 +23,29 @@ public class LoginController {
 	public String index() {
 		return "redirect:/login";
 	}
-	
+
 	@GetMapping("/login")
 	public ModelAndView login() {
 		ModelAndView model = new ModelAndView("login");
 		model.addObject("loginForm", new LoginForm());
 		return model;
 	}
-	
+
 	@PostMapping("/login")
 	public String loginRedirect(@ModelAttribute("loginForm") 
-	LoginForm loginForm) {
-		
+			LoginForm loginForm) {
+
 		String username = loginForm.getUsername();
 		String password = loginForm.getPassword();
 		
 		UsuarioContato usuarioContato = usuarioContatoService
 				.login(username, password);
-		if (usuarioContato!= null) {
+		
+		if (usuarioContato != null) {
 			return "redirect:/usuarioContato/" + usuarioContato.getId();
 		}
-		
+
 		return "redirect:/login";
 	}
+
 }

@@ -1,45 +1,41 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.ThymeLeaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" 
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	
-	<link rel="stylesheet" type="text/css" href="main.css">
-	
+<meta charset="UTF-8">
+<title>Thymeleaf Exemplo</title>
 </head>
+<body>
+	<form action="#" th:action="@{/usuario}" th:object="${usuario}"
+		method="post">
 
-<body id="body2">
-
+		<input type="text" id="name" th:field="*{name}"> <input
+			type="password" id="password" th:field="*{password}">
+		<button type="submit">Salvar</button>
+	</form>
 	<h1>Lista de Usuários</h1>
-	
-	<table class="table">
-	
+	<table>
 		<thead>
-		
 			<tr>
-			 	<th>Id</th>
-			 	<th>Nome da Pessoa</th>
-			 	<th>Password</th>
-			 	<th>Celular</th>
-			 	<th>Imagem</th>
-			 </tr>
-			 
+				<th>Id</th>
+				<!-- coluna onde sera mostrado o id -->
+				<th>Nome da Pessoa</th>
+				<!-- Coluna onde será mostrado o nome -->
+				<th>Password</th>
+				<!-- colina do password -->
+			</tr>
 		</thead>
 		<tbody>
-
 			<tr th:each="usuario : ${usuarios}">
+				<!--  repetir o laço de repetição-->
 				<td th:text="${usuario.id}"></td>
+				<!-- linhas da tabela -->
+				<!-- id do usuario -->
 				<td th:text="${usuario.name}"></td>
+				<!-- Name do usuario -->
 				<td th:text="${usuario.password}"></td>
-				<td th:text="${usuario.celular}"></td>
-				<td th:text="${usuario.imagem}"></td>
+				<!-- -password do usuario -->
 			</tr>
-			
 		</tbody>
 	</table>
 </body>
-
 </html>

@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 * {
 	box-sizing: border-box;
 }
@@ -96,5 +97,3 @@ body {
 		float: none;
 		width: 100%;
 	}
-}
-</style>

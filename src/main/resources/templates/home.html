@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Page Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+}
+
+/* Style the header */
+.header {
+	padding: 80px;
+	text-align: center;
+	background: #1abc9c;
+	color: white;
+}
+
+/* Increase the font size of the h1 element */
+.header h1 {
+	font-size: 40px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+	overflow: hidden;
+	background-color: #333;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+	float: left;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 20px;
+	text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+	float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+/* Column container */
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+	flex: 30%;
+	background-color: #f1f1f1;
+	padding: 20px;
+}
+
+/* Main column */
+.main {
+	flex: 70%;
+	background-color: white;
+	padding: 20px;
+}
+
+/* Fake image, just for this example */
+.fakeimg {
+	background-color: #aaa;
+	width: 100%;
+	padding: 20px;
+}
+
+/* Footer */
+.footer {
+	padding: 20px;
+	text-align: center;
+	background: #ddd;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+	.row {
+		flex-direction: column;
+	}
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+	.navbar a {
+		float: none;
+		width: 100%;
+	}
+}
+</style>
+
+</head>
+<body>
+
+	<div class="header">
+		<h1>Avaliação</h1>
+		<p>@ Tghstrona 0(64)984211996.</p>
+	</div>
+
+	<div class="navbar">
+		<a href="#">UEG</a> <a href="#">Santa Helena de Goías</a> <a href="#">Sistemas
+			de Informação</a> <a href="#" class="right">Prof. Dr. Adriano Ferraz</a>
+	</div>
+
+	<div class="row">
+		<div class="side" th:each="usuarioView: ${usuarios}">
+			<tr>
+				<td></td>
+				<h1 th:text="${usuarioView.name}"></h1>
+				<div class="fakeimg" style="height: 200px;">Image</div>
+				<h3>Contato</h3>
+				<p th:text="${usuarioView.email}"></p>
+				<p th:text="${usuarioView.celular}"></p>
+		</div>
+		<div class="main">
+			<div class="container">
+				<form th:action="@{/atividade}" th:object="${atividade}"
+					method="post">
+					<div class="form-group">
+						<label for="descricao">Descricao</label> <input type="text"
+							class="form-control" id="descricao" placeholder="Enter descricao"
+							th:field="*{descricao}">
+					</div>
+					<div class="form-group">
+						<label for="status">Escolha um status</label> <select
+							th:field="*{status}">
+							<option value="FAZENDO">FAZENDO</option>
+							<option value="FEITO">FEITO</option>
+							<option value="A_FAZER">A_FAZER</option>
+
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="usuario">Escolha um usuário </label> <select
+							th:field="*{idUsuarioContato}">
+							<option th:each="usuario: ${usuarioSelect}"
+								th:text="${usuario.name}" th:value="${usuario.id}"></option>
+						</select>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</form>
+				<table class="table" style="width: 100%">
+					<thead class="thead-dark">
+						<tr>
+							<th># Id</th>
+							<th>ATIVIDADE</th>
+							<th>Status</th>
+
+							<th>Usuário</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="atividade: ${atividades}">
+							<th></th>
+							<td style="text-aling: left" th:text="${atividade.id}"></td>
+							<td th:text="${atividade.descricao}"></td>
+							<td th:text="${atividade.status}"></td>
+							<td th:text="${atividade.idUsuarioContato}"></td>
+							<td style="cursor: pointer"
+								th:onclick="'javascript:deleteUsuario(\''+${atividade.id}+'\');'">DELETAR</td>
+							<td style="cursor: pointer"><a
+								th:href="'/atividade/edit/'+${atividade.id}">EDITAR</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<h2>Disciplina Programação IV @ Tghstronda.</h2>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
+	<script>
+		function deleteUsuario(id) {
+			if (confirm("Deseja realmente deletar esse usuário?")) {
+				$.ajax({
+					url : '/atividade/delete/' + id,
+					type : 'DELETE',
+					success : function(result) {
+						window.location.reload();
+					},
+					error : function() {
+						window.location.reload();
+					}
+
+				});
+			}
+			window.location.reload();
+		}
+	</script>
+</body>
+</html>

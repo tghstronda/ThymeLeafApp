@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.ueg.thymeleafapp.model.Atividade;
 import br.ueg.thymeleafapp.model.UsuarioContato;
-import br.ueg.thymeleafapp.repositories.AtividadeRepository;
+import br.ueg.thymeleafapp.services.AtividadeService;
 import br.ueg.thymeleafapp.services.UsuarioContatoService;
 
 @Controller
@@ -19,11 +19,12 @@ import br.ueg.thymeleafapp.services.UsuarioContatoService;
 public class UsuarioContatoController {
 	
 	@Autowired
-	private AtividadeRepository atividadeRepository;
 	private final UsuarioContatoService usuarioContatoService;
+	private final AtividadeService atividadeService;
 	
-	public UsuarioContatoController(UsuarioContatoService usuarioContatoService) {
+	public UsuarioContatoController(UsuarioContatoService usuarioContatoService, AtividadeService atividadeService) {
 		this.usuarioContatoService = usuarioContatoService;
+		this.atividadeService = atividadeService;
 	}
 	
 	@GetMapping
@@ -41,15 +42,12 @@ public class UsuarioContatoController {
 	
 	@GetMapping("/{id}")
 	public ModelAndView homeUsuario(@PathVariable("id") Long id) {
-		ModelAndView model = new ModelAndView("home");
+		ModelAndView ModelAndView = new ModelAndView("home");
 		UsuarioContato usuarioContato = usuarioContatoService.findById(id);
-		model.addObject("usuarios", usuarioContato);
-		Atividade atividade = new Atividade();
-//		atividade.setIdUsuarioContato(usuarioContato.getId());
-		model.addObject("atividade", atividade);
-		model.addObject("atividades", this.atividadeRepository.findAll());
-		model.addObject("usuarioSelect", this.usuarioContatoService.listaUsuarios());
-		return model;
+		ModelAndView.addObject("usuarios", usuarioContato);
+		ModelAndView.addObject("atividadeForm", new Atividade());
+		ModelAndView.addObject("atividades", this.atividadeService.listAll());
+		return ModelAndView;
 	}
 
 }

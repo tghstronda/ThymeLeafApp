@@ -3,11 +3,9 @@
  */
 package br.ueg.thymeleafapp.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.ueg.thymeleafapp.model.Atividade;

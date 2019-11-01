@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * @author tghstronda
@@ -19,8 +20,11 @@ public class Atividade {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String descricao;
-	private String status;
 	private Long idUsuarioContato;
+	private String status;
+
+	@ManyToOne
+	private UsuarioContato usuarioContato;
 
 	public Long getId() {
 		return id;
@@ -45,13 +49,17 @@ public class Atividade {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 	public Long getIdUsuarioContato() {
 		return idUsuarioContato;
 	}
-
 	public void setIdUsuarioContato(Long idUsuarioContato) {
 		this.idUsuarioContato = idUsuarioContato;
+	}
+	public UsuarioContato getUsuarioContato() {
+		return usuarioContato;
+	}
+	public void setUsuarioContato(UsuarioContato usuarioContato) {
+		this.usuarioContato = usuarioContato;
 	}
 
 	@Override

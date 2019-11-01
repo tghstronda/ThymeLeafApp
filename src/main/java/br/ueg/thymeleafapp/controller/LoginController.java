@@ -32,15 +32,12 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public String loginRedirect(@ModelAttribute("loginForm") 
-			LoginForm loginForm) {
+	public String loginRedirect(@ModelAttribute("loginForm") LoginForm loginForm) {
 
 		String username = loginForm.getUsername();
 		String password = loginForm.getPassword();
 		
-		UsuarioContato usuarioContato = usuarioContatoService
-				.login(username, password);
-		
+		UsuarioContato usuarioContato = usuarioContatoService.login(username, password);
 		if (usuarioContato != null) {
 			return "redirect:/usuarioContato/" + usuarioContato.getId();
 		}

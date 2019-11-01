@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Page Title</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Thymeleaf Exemplo</title>
 <style>
 * {
 	box-sizing: border-box;
@@ -104,7 +107,6 @@ body {
 	}
 }
 </style>
-
 </head>
 <body>
 
@@ -120,17 +122,15 @@ body {
 
 	<div class="row">
 		<div class="side" th:each="usuarioView: ${usuarios}">
-			<tr>
-				<td></td>
-				<h1 th:text="${usuarioView.name}"></h1>
+				<h1 th:text="${{usuarioView.name}}"></h1>
 				<div class="fakeimg" style="height: 200px;">Image</div>
 				<h3>Contato</h3>
-				<p th:text="${usuarioView.email}"></p>
-				<p th:text="${usuarioView.celular}"></p>
+				<p th:text="${{usuarioView.email}}"></p>
+				<p th:text="${{usuarioView.celular}}"></p>
 		</div>
 		<div class="main">
 			<div class="container">
-				<form th:action="@{/atividade}" th:object="${atividade}"
+				<form th:action="@{/atividade/{usuarioContatoId}(usuarioContatoId=${usuarios.id})}" th:object="${atividadeForm}"
 					method="post">
 					<div class="form-group">
 						<label for="descricao">Descricao</label> <input type="text"
@@ -138,52 +138,44 @@ body {
 							th:field="*{descricao}">
 					</div>
 					<div class="form-group">
-						<label for="status">Escolha um status</label> <select
-							th:field="*{status}">
+						<label for="status">Escolha um status</label> 
+						<select th:field="*{status}">
 							<option value="FAZENDO">FAZENDO</option>
 							<option value="FEITO">FEITO</option>
 							<option value="A_FAZER">A_FAZER</option>
 
 						</select>
 					</div>
-					<div class="form-group">
-						<label for="usuario">Escolha um usuário </label> <select
-							th:field="*{idUsuarioContato}">
-							<option th:each="usuario: ${usuarioSelect}"
-								th:text="${usuario.name}" th:value="${usuario.id}"></option>
-						</select>
-					</div>
+					
 
-					<button type="submit" class="btn btn-primary">Salvar</button>
+					<button class="btn btn-primary" type="submit" >Salvar</button>
 				</form>
 				<table class="table" style="width: 100%">
 					<thead class="thead-dark">
 						<tr>
-							<th># Id</th>
-							<th>ATIVIDADE</th>
+							<th>Descrição</th>
 							<th>Status</th>
-
-							<th>Usuário</th>
-							<th>Ações</th>
+							<th>Editar</th>
+							<th>Deletar</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="atividade: ${atividades}">
-							<th></th>
-							<td style="text-aling: left" th:text="${atividade.id}"></td>
 							<td th:text="${atividade.descricao}"></td>
-							<td th:text="${atividade.status}"></td>
-							<td th:text="${atividade.idUsuarioContato}"></td>
-							<td style="cursor: pointer"
-								th:onclick="'javascript:deleteUsuario(\''+${atividade.id}+'\');'">DELETAR</td>
-							<td style="cursor: pointer"><a
-								th:href="'/atividade/edit/'+${atividade.id}">EDITAR</td>
+							<div th:case = "FAZENDO">
+							<td th:text = "${atividade.status}" class="bg-warnning"></td>
+							</div>
+							<div th:case = "FEITO">
+							<td th:text = "${atividade.status}" class="bg-sucess"></td>
+							</div>
+							<div th:case = "A_FAZER">
+							<td th:text = "${atividade.status}" class="bg-danger"></td>
+							</div>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-	</div>
 
 	<div class="footer">
 		<h2>Disciplina Programação IV @ Tghstronda.</h2>
@@ -201,24 +193,5 @@ body {
 		crossorigin="anonymous"></script>
 	<script
 		src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-
-	<script>
-		function deleteUsuario(id) {
-			if (confirm("Deseja realmente deletar esse usuário?")) {
-				$.ajax({
-					url : '/atividade/delete/' + id,
-					type : 'DELETE',
-					success : function(result) {
-						window.location.reload();
-					},
-					error : function() {
-						window.location.reload();
-					}
-
-				});
-			}
-			window.location.reload();
-		}
-	</script>
 </body>
 </html>

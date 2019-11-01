@@ -2,7 +2,6 @@ package br.ueg.thymeleafapp.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +31,10 @@ public class UsuarioContatoService {
 	
 	public UsuarioContato findById(long id) {
 		return usuarioContatoRepository.getOne(id);
+		//return usuarioContatoRepository.getOne(id);
 	}
 	
 	public UsuarioContato login(String username, String password) {
-		return (UsuarioContato) usuarioContatoRepository
-				.findByLogin(username, password);
+		return (UsuarioContato) usuarioContatoRepository.findByLogin(username, password);
 	}
 }

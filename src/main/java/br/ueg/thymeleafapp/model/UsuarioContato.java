@@ -1,9 +1,12 @@
 package br.ueg.thymeleafapp.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class UsuarioContato {
@@ -17,7 +20,9 @@ public class UsuarioContato {
 	private String celular;
 	private String imagem;
 	
-
+	@OneToMany (mappedBy = "usuarioContato")
+	private List<Atividade> atividade;
+	
 	public Long getId() {
 		return id;
 	}

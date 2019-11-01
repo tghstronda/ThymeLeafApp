@@ -12,14 +12,14 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+	<link rel="stylesheet" tipe="test" th:href= "edit.css">
 <title>Thymeleaf Exemplo</title>
 </head>
 <body>
 	<div class="container">
 
 		<h1>Formulario novo usuario</h1>
-		<form action="#" th:action="@{/usuarioContato}"
-			th:object="${usuarioContato}" method="post">
+		<form th:action="@{/usuarioContato}" th:object="${usuarioContato}" method="post">
 			<div class="form-group">
 
 				<div class="form-group">
@@ -41,7 +41,8 @@
 				</div>
 
 
-				<button type="submit">Salvar</button>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
+				<a class="btn btn-lg btn-primary btn-block" th:href="@{/login}" role="button">Voltar ao Login</a>
 
 			</div>
 		</form>
